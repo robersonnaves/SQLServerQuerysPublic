@@ -6,7 +6,7 @@ USING
 (SELECT * FROM dbo.TabelaA) AS Origem
 ON (Origem.Id = Destino.Id) -- chaves para comparação
 
--- Se o registro existe nas 2 tabelas
+-- Se as chaves forem iguais nas 2 tabelas, atualiza a de destino.
 WHEN MATCHED THEN
     UPDATE SET Destino.Id = Origem.Id,
                Destino.Nome = Origem.Nome,
@@ -16,7 +16,7 @@ WHEN MATCHED THEN
 WHEN NOT MATCHED BY SOURCE THEN
     DELETE
 
--- Se o registro não existe no destino, insere.
+-- Se a chave não existe no destino, insere.
 WHEN NOT MATCHED BY TARGET THEN
     INSERT VALUES
            (Origem.Id, Origem.Nome, Origem.Cidade)
