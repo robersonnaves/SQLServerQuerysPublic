@@ -7,9 +7,9 @@ GO
 MERGE dbo.TabelaB AS Destino
 USING
 (SELECT * FROM dbo.TabelaA) AS Origem
-ON (Origem.Id = Destino.Id) -- chaves para comparação
+ON (Origem.Id = Destino.Id) -- Chaves para comparação. Esse é o match
 
--- Se as chaves forem iguais nas 2 tabelas, atualiza a de destino.
+-- Se o registro existe nas 2 tabelas
 WHEN MATCHED THEN
     UPDATE SET Destino.Id = Origem.Id,
                Destino.Nome = Origem.Nome,
@@ -19,7 +19,7 @@ WHEN MATCHED THEN
 WHEN NOT MATCHED BY SOURCE THEN
     DELETE
 
--- Se a chave não existe no destino, insere.
+-- Se o registro não existe no destino, insere.
 WHEN NOT MATCHED BY TARGET THEN
     INSERT VALUES
            (Origem.Id, Origem.Nome, Origem.Cidade)
