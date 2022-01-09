@@ -1,3 +1,6 @@
+-- Referência
+-- https://docs.microsoft.com/pt-br/sql/t-sql/statements/merge-transact-sql?view=sql-server-ver15
+
 USE TesteA
 GO
 
